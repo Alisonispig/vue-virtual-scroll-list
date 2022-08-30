@@ -1,5 +1,5 @@
 /*!
- * vue-virtual-scroll-list v2.3.4
+ * vue-virtual-scroll-list v2.3.4-bate.1
  * open source under the MIT license
  * https://github.com/tangbc/vue-virtual-scroll-list#readme
  */
@@ -641,7 +641,7 @@
       getCurrentSize: function getCurrentSize() {
         return this.$el ? this.$el[this.shapeKey] : 0;
       },
-      // tell parent current size identify by unqiue key
+      // 告诉由唯一键标识的父当前大小
       dispatchSizeChange: function dispatchSizeChange() {
         this.$parent.$emit(this.event, this.uniqueKey, this.getCurrentSize(), this.hasInitial);
       }
@@ -652,6 +652,8 @@
     mixins: [Wrapper],
     props: ItemProps,
     render: function render(h) {
+      var _this2 = this;
+
       var tag = this.tag,
           component = this.component,
           _this$extraProps = this.extraProps,
@@ -672,6 +674,11 @@
         key: uniqueKey,
         attrs: {
           role: 'listitem'
+        },
+        on: {
+          click: function click() {
+            _this2.$parent.$emit('click-item', index);
+          }
         }
       }, [slotComponent ? h('div', slotComponent({
         item: source,

@@ -37,7 +37,7 @@ const Wrapper = {
       return this.$el ? this.$el[this.shapeKey] : 0
     },
 
-    // tell parent current size identify by unqiue key
+    // 告诉由唯一键标识的父当前大小
     dispatchSizeChange () {
       this.$parent.$emit(this.event, this.uniqueKey, this.getCurrentSize(), this.hasInitial)
     }
@@ -62,6 +62,11 @@ export const Item = Vue.component('virtual-list-item', {
       key: uniqueKey,
       attrs: {
         role: 'listitem'
+      },
+      on: {
+        click: () => {
+          this.$parent.$emit('click-item', index)
+        }
       }
     }, [slotComponent ? h('div', slotComponent({ item: source, index: index, scope: props })) : h(component, {
       props,

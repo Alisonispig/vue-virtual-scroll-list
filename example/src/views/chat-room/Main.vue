@@ -14,6 +14,7 @@
           :estimate-size="100"
           :item-class="'stream-item'"
           :item-class-add="addItemClass"
+                      @click-item="clickItem"
           @resized="onItemRendered"
           @totop="onTotop"
         >
@@ -133,7 +134,9 @@ export default {
     addItemClass (index) {
       return (this.messages[index] && this.messages[index].isCreator) ? 'creator' : ''
     },
-
+    clickItem (index) {
+      console.log(index)
+    },
     checkOverFlow () {
       const vsl = this.$refs.vsl
       if (vsl) {
